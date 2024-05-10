@@ -23,7 +23,7 @@ class Stockfish(ExampleEngine):
         super().__init__(commands, options, stderr, draw_or_resign, game, **popen_args)
         self.engine = chess.engine.SimpleEngine.popen_uci(f"./TEMP/sf{file_extension}")
 
-    def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
+    def search(self, board: chess.Board, game: model.Game, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
                root_moves: MOVE) -> chess.engine.PlayResult:
         """Get a move using Stockfish."""
         return self.engine.play(board, time_limit)
