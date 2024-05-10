@@ -27,6 +27,13 @@ class ExampleEngine(MinimalEngine):
 
 # Bot names and ideas from tom7's excellent eloWorld video
 
+class ChessRobertaEngine(ExampleEngine):
+    """Chess Roberta! But for now, get a random move."""
+
+    def search(self, board: chess.Board, *args: Any) -> PlayResult:
+        """Choose a random move."""
+        return PlayResult(random.choice(list(board.legal_moves)), None)
+
 class RandomMove(ExampleEngine):
     """Get a random move."""
 
