@@ -25,8 +25,10 @@ class ChessRobertaDriver:
     def __init__(self):
         print("Initializing a ChessRobertaDriver instance")
 
-    def get_next_play(game: chess.Game) -> chess.engine.PlayResult:
-        pass
+    def get_next_play(moves: list[str]) -> chess.Move:
+        '''Return the next UCI move in a game. Assumes moves contains all moves from starting FEN'''
+        move : chess.Move = random.choice(list(board.legal_moves))
+        return move
 
 
 class ExampleEngine(MinimalEngine):
@@ -47,7 +49,7 @@ class ChessRobertaEngine(ExampleEngine):
     def search(self, board: chess.Board, game: model.Game, *args: Any) -> chess.engine.PlayResult:
         """Choose a random move."""
         # TODO: Compress all information into a chess.Game object
-        full_game : chess.Game = None
-
-        # return self.chess_roberta_driver.get_next_play(full_game)
-        return chess.engine.PlayResult(random.choice(list(board.legal_moves)), None)
+        assert game.initial_fen == "startpos"
+        moves : list[str] = game.state['moves'].split(' ')
+        move : chess.Move = self.chess_roberta_driver.get_next_play(moves)
+        return chess.engine.PlayResult(move, None)
