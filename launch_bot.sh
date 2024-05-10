@@ -12,7 +12,7 @@
 #SBATCH -o ./slurm_output/preprocess-%A.out
 
 # Environment configs
-ENV_NAME="chess-roberta"
+ENV_NAME="lichess-bot"
 PYTHON_VERSION="3.9.18"
 
 # run the actual script
@@ -28,4 +28,4 @@ fi
 conda activate $ENV_NAME
 pip install -r requirements.txt
 
-python -u ./lichess_bot.py
+python -u ./lichess-bot.py
