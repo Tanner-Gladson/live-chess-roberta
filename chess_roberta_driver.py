@@ -35,19 +35,22 @@ class ChessRobertaDriver:
   def __init__(self):
     logger.info("Initializing a ChessRobertaDriver instance")
     # if torch.cuda.is_available():
-    #   logger.info("using cuda")
+    #   logger.info("... using cuda")
     #   self.device = torch.device("cuda")
     # else:
-    #   logger.info("using cpu")
+    #   logger.info("... using cpu")
     #   self.device = torch.device("cpu")
   
     # self.tokenizer = AutoTokenizer.from_pretrained("TannerGladson/chess-roberta")
+    logger.info("... loaded tokenizer")
     # self.model = AutoModelForMaskedLM.from_pretrained("TannerGladson/chess-roberta")
-    # self.model.to(self.device)
+    logger.info("... loaded model")
 
-    # # we need a small corpus to sample from for packing sequences
-    # sample_frames : list[str] = ChessRobertaDriver.get_samples()
+    # we need a small corpus to sample from for packing sequences
+    sample_frames : list[str] = ChessRobertaDriver.get_samples()
+    logger.info("... loaded sample frames")
     # self.sample_frame_encodings : list[list[int]] = [self.tokenizer(frame, return_tensors="pt")["input_ids"].tolist() for frame in sample_frames]
+    logger.info("... encoded sample frames")
     logger.info("ChessRobertaDriver parameters have been loaded")
 
   def get_next_play(self, moves: list[str], board: chess.Board) -> chess.Move:
@@ -60,7 +63,7 @@ class ChessRobertaDriver:
     legal_generated_moves = [move for move in generated_moves if move in all_legal_moves]
 
     if len(legal_generated_moves) == 0:
-      logger.info("ChessRobertaDriver did not generate any legal moves, choosing random move")
+      # logger.info("ChessRobertaDriver did not generate any legal moves, choosing random move")
       return random.choice(all_legal_moves)
     
     return random.choice(legal_generated_moves)
