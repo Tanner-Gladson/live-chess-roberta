@@ -6,10 +6,12 @@
 #SBATCH --time=12:00:0
 #SBATCH --mail-user=tannergladson@gmail.com
 #SBATCH --mail-type=ALL
-#SBATCH --job-name="chess-roberta-preprocess"
+#SBATCH --job-name="live-chess-roberta"
 #SBATCH --output=slurm-%j.out
 #SBATCH --mem=16G
 #SBATCH -o ./slurm_output/preprocess-%A.out
+
+# launch interactive: salloc -p shared --mem=16G --time=1:00:00
 
 # Environment configs
 ENV_NAME="lichess-bot"
