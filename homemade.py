@@ -13,7 +13,6 @@ import logging
 import sys
 from lib.config import Configuration
 from lib import model
-
 from chess_roberta_driver import ChessRobertaDriver
 
 OPTIONS_TYPE = dict[str, Any]
@@ -27,7 +26,7 @@ class ExampleEngine(MinimalEngine):
     pass
 
 
-class ChessRobertaEngine(ExampleEngine):
+class ChessRobertaEngine(MinimalEngine):
     """Chess Roberta! But for now, get a random move."""
 
     def __init__(self, commands: COMMANDS_TYPE, options: OPTIONS_TYPE, stderr: Optional[int],
@@ -42,3 +41,6 @@ class ChessRobertaEngine(ExampleEngine):
         moves : list[str] = game.state['moves'].split(' ')
         move : chess.Move = self.chess_roberta_driver.get_next_play(moves, board)
         return chess.engine.PlayResult(move, None)
+
+        #return chess.engine.PlayResult(random.choice(list(board.legal_moves)), None)
+

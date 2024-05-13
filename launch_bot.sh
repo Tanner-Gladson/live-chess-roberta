@@ -11,7 +11,7 @@
 #SBATCH --mem=16G
 #SBATCH -o ./slurm_output/preprocess-%A.out
 
-# launch interactive: salloc -p shared --mem=16G --time=1:00:00
+# launch interactive: salloc -p shared --mem=16G --time=3:00:00
 
 # Environment configs
 ENV_NAME="lichess-bot"

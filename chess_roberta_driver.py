@@ -56,15 +56,14 @@ class ChessRobertaDriver:
       - moves: a list of UCI moves from the starting FEN
     '''
     generated_moves : list[chess.Move] = self.generate_move_candidates(moves)
-    all_legal_moves = board.legal_moves
+    all_legal_moves = list(board.legal_moves)
     legal_generated_moves = [move for move in generated_moves if move in all_legal_moves]
 
     if len(legal_generated_moves) == 0:
       logger.info("ChessRobertaDriver did not generate any legal moves, choosing random move")
-      move : chess.Move = random.choice(all_legal_moves)
-    else:
-      move : chess.Move = random.choice(legal_generated_moves)
-    return moves
+      return random.choice(all_legal_moves)
+    
+    return random.choice(legal_generated_moves)
   
   def generate_move_candidates(self, moves: list[str]) -> list[chess.Move]:
     ''' Generate a batch of candidates for the next move'''
