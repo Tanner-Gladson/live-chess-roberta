@@ -7,3 +7,4 @@ lichess_bot_auto_logs/*
 *.pgn
 *.log
 TEMP/*
+*.out
